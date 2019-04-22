@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Dating.API.Migrations
+namespace DatingApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190421175506_mysqlinit")]
-    partial class mysqlinit
+    [Migration("20190422103420_InitMySql")]
+    partial class InitMySql
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

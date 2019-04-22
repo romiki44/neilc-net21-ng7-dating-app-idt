@@ -36,6 +36,12 @@ namespace Dating.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Sqlite appsettins.Development.json
+            /*"DefaultConnection": "Data Source=DatingApp.db"*/
+
+            //Sqlite ConfigureServices
+            /*services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))); */
+
             services.AddDbContext<DataContext>(x => x
                 .UseMySql(Configuration.GetConnectionString("DefaultConnection"))
                 .ConfigureWarnings(warning => warning.Ignore(CoreEventId.IncludeIgnoredWarning)));
@@ -66,7 +72,7 @@ namespace Dating.API
             services.AddScoped<LogUserActivity>();
         }
 
-        public void ConfigureDevelopmentServices(IServiceCollection services)
+        /*public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
@@ -94,7 +100,7 @@ namespace Dating.API
                     };
                 });
             services.AddScoped<LogUserActivity>();
-        }
+        }*/
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure

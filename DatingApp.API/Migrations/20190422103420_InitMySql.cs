@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Dating.API.Migrations
+namespace DatingApp.API.Migrations
 {
-    public partial class mysqlinit : Migration
+    public partial class InitMySql : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
