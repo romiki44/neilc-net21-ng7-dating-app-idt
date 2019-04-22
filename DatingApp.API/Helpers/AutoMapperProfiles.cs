@@ -31,10 +31,10 @@ namespace DatingApp.API.Helpers
             CreateMap<MessageForCreationDto, Message>().ReverseMap();
             CreateMap<Message, MessageToReturnDto>()
                 .ForMember(d=>d.SenderKnownAs, opt => {
-                    opt.MapFrom(src=>src.Sender.KnowAs);
+                    opt.MapFrom(src=>src.Sender.KnownAs);
                 })
                 .ForMember(d=>d.RecipientKnownAs, opt=> {
-                    opt.MapFrom(src=>src.Recipient.KnowAs);
+                    opt.MapFrom(src=>src.Recipient.KnownAs);
                 })
                 .ForMember(d=>d.SenderPhotoUrl, opt => {
                     opt.MapFrom(src=>src.Sender.Photos.FirstOrDefault(p=>p.IsMain).Url);
