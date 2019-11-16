@@ -178,6 +178,8 @@ ngx-bootstrap/dropdown
 
 ngx-bootstrap/mini-ngrx
 
+ngx-bootstrap/modal
+
 ngx-bootstrap/pagination
 
 ngx-bootstrap/positioning
