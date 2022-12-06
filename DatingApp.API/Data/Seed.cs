@@ -24,20 +24,24 @@ namespace DatingApp.API.Data
                 var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
 
-                var roles=new List<Role> {
-                    new Role{Name="Member"},
-                    new Role{Name="Admin"},
-                    new Role{Name="Moderator"},
-                    new Role{Name="VIP"}
-                };
+                if(!_roleManager.Roles.Any())
+                {
+                    var roles = new List<Role> {
+                        new Role{Name="Member"},
+                        new Role{Name="Admin"},
+                        new Role{Name="Moderator"},
+                        new Role{Name="VIP"}
+                    };
 
-                foreach(var role in roles) {
-                    await _roleManager.CreateAsync(role);
+                    foreach (var role in roles)
+                    {
+                        await _roleManager.CreateAsync(role);
+                    }
                 }
 
                 foreach (var user in users) {
                     user.Photos.SingleOrDefault().IsApproved=true;
-                    await _userManager.CreateAsync(user, "password");
+                    await _userManager.CreateAsync(user, "Pwd123*");
                     await _userManager.AddToRoleAsync(user, "Member");
                 }
 
@@ -45,7 +49,7 @@ namespace DatingApp.API.Data
                     UserName="Admin"
                 };
 
-                IdentityResult result=await _userManager.CreateAsync(adminUser, "password");
+                IdentityResult result=await _userManager.CreateAsync(adminUser, "Admin123*");
 
                 if(result.Succeeded) {
                     var admin=await _userManager.FindByNameAsync("Admin");

@@ -46,9 +46,12 @@ namespace Dating.API
             //Sqlite ConfigureServices
             /*services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))); */
 
-            services.AddDbContext<DataContext>(x => x
-                .UseMySql(Configuration.GetConnectionString("DefaultConnection"))
-                .ConfigureWarnings(warning => warning.Ignore(CoreEventId.IncludeIgnoredWarning)));
+            //services.AddDbContext<DataContext>(x => x
+            //    .UseMySql(Configuration.GetConnectionString("DefaultConnection"))
+            //    .ConfigureWarnings(warning => warning.Ignore(CoreEventId.IncludeIgnoredWarning)));
+
+            services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             IdentityBuilder builder = services.AddIdentityCore<User>(opt =>
             {
@@ -136,8 +139,7 @@ namespace Dating.API
         }*/
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure
-        (IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -163,7 +165,7 @@ namespace Dating.API
             }
 
             //app.UseHttpsRedirection();
-            //seeder.SeedUsers().Wait();  //testuje, ci existuje nejaky user, cize nemusi byt zakomentovane
+            seeder.SeedUsers().Wait();  //testuje, ci existuje nejaky user, cize nemusi byt zakomentovane
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseDefaultFiles();
